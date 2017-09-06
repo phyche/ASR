@@ -40,18 +40,18 @@ public class ASR {
         //对本地语音文件进行识别
         String path = "F:\\娱乐\\新录音.pcm";
         JSONObject asrRes = client.asr(path,"pcm",16000,null);
-        System.out.println("对本地语音文件进行识别" + asrRes);
+        System.out.println("对本地语音文件进行识别:" + asrRes);
 
         // 对语音二进制数据进行识别
         byte[] data = Util.readFileByBytes(path);     //readFileByBytes仅为获取二进制数据示例
         JSONObject asrRes2 = client.asr(data, "pcm", 16000, null);
-        System.out.println("对语音二进制数据进行识别" + asrRes2);
+        System.out.println("对语音二进制数据进行识别:" + asrRes2);
 
         // 对网络上音频进行识别
         String url = "http://somehost/res/16k_test.pcm";
         String callback = "http://callbackhost/aip/dump";
         JSONObject res = client.asr(url, callback, "pcm", 16000, null);
-        System.out.println("对网络上音频进行识别" + res);
+        System.out.println("对网络上音频进行识别:" + res);
 
     }
 }

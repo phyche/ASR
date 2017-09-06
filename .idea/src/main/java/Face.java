@@ -39,12 +39,12 @@ public class Face {
         // 参数为本地图片路径
         String imagePath = "F:\\a.jpg";
         JSONObject response = client.detect(imagePath, options);
-        System.out.println(response.toString());
+        System.out.println("参数为本地图片路径:" + response.toString());
 
         // 参数为本地图片文件二进制数组
         /*byte[] file = readImageFile(imagePath);
         JSONObject response = client.detect(file, options);
-        System.out.println(response.toString());*/
+        System.out.println("参数为本地图片文件二进制数组:" + response.toString());*/
 
         // 参数为本地图片路径
         String imagePath1 = "F:\\a.jpg";
@@ -53,7 +53,7 @@ public class Face {
         pathArray.add(imagePath1);
         pathArray.add(imagePath2);
         response = client.match(pathArray, new HashMap<String, String>());
-        System.out.println(response.toString());
+        System.out.println("参数为本地图片路径:" + response.toString());
 
     }
 }
