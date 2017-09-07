@@ -26,18 +26,39 @@ public class Word {
         System.out.println("调用身份证识别接口" + idcardRes.toString(2));
 
         // 调用银行卡识别接口
-        String bankFilePath = "F:\\娱乐\\20170906173124.png";
+        String bankFilePath = "F:\\娱乐\\银行卡.png";
         JSONObject bankRes = client.bankcard(bankFilePath);
         System.out.println("调用银行卡识别接口:" + bankRes.toString(2));
 
         // 调用通用识别接口
-        String genFilePath = "F:\\a.jpg";
-        JSONObject genRes = client.basicGeneral(genFilePath, new HashMap<String, String>());
+        JSONObject genRes = client.basicGeneral(idFilePath, new HashMap<String, String>());
         System.out.println("调用通用识别接口:" + genRes.toString(2));
 
+
         // 调用通用识别（含位置信息）接口
-        String genFilePath2 = "F:\\a.jpg";
-        JSONObject genRes2 = client.general(genFilePath2, new HashMap<String, String>());
+        JSONObject genRes2 = client.general(idFilePath, new HashMap<String, String>());
         System.out.println("调用通用识别（含位置信息）接口:" + genRes2.toString(2));
+
+        // 调用通用识别接口(生僻字)暂不支持使用
+        JSONObject genRes3 = client.enhancedGeneral(idFilePath,new HashMap<String, String>());
+        System.out.println("调用通用识别含生僻字接口:" + genRes3.toString(2));
+
+        // 调用通用识别接口(高精度)
+        JSONObject genRes4 = client.basicAccurateGeneral(idFilePath,new HashMap<String, String>());
+        System.out.println("调用通用识别高精度版接口:" + genRes4.toString(2));
+
+        // 调用通用识别接口(高精度含位置)
+        JSONObject genRes5 = client.accurateGeneral(idFilePath,new HashMap<String, String>());
+        System.out.println("调用通用识别高精度含位置版接口:" + genRes5.toString(2));
+
+        // 行驶证识别接口
+        String vehicleFilePath = "F:\\娱乐\\行驶证.png";
+        JSONObject genRes6 = client.vehicleLicense(vehicleFilePath,new HashMap<String, String>());
+        System.out.println("调用行驶证识别接口:" + genRes6.toString(2));
+
+        // 驾驶证识别接口
+        String drivingFilePath = "F:\\娱乐\\驾驶证.png";
+        JSONObject genRes7 = client.drivingLicense(drivingFilePath,new HashMap<String, String>());
+        System.out.println("调用驾驶证识别接口:" + genRes7.toString(2));
     }
 }
