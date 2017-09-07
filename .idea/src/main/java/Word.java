@@ -4,7 +4,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 /**
- * Created by Administrator on 2017-9-6.
+ * Created by 蔡琦 on 2017-9-6.
+ * 文字识别
  */
 public class Word {
     //设置APPID/AK/SK

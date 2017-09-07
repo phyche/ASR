@@ -45,7 +45,6 @@ public class Face {
         //用户信息查询
         getUser(client);
 
-        //
     }
 
     public static void faceRecognize(AipFace client) {
