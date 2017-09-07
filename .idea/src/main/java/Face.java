@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -26,8 +27,25 @@ public class Face {
         client.setConnectionTimeoutInMillis(2000);
         client.setSocketTimeoutInMillis(60000);
 
-        // 调用API
-        faceRecognize(client);
+        // 人脸检测
+        //faceRecognize(client);
+
+        //人脸识别
+        //identifyUser(client);
+
+        //人脸注册
+        //facesetAddUser(client);
+
+        //人脸认证
+        //verifyUser(client);
+
+        //人脸更新
+        facesetUpdateUser(client);
+
+        //用户信息查询
+        getUser(client);
+
+        //
     }
 
     public static void faceRecognize(AipFace client) {
@@ -48,12 +66,67 @@ public class Face {
 
         // 参数为本地图片路径
         String imagePath1 = "F:\\a.jpg";
-        String imagePath2 = "F:\\test.jpg";
+        String imagePath2 = "F:\\娱乐\\20170906173124.png";
         ArrayList<String> pathArray = new ArrayList<String>();
         pathArray.add(imagePath1);
         pathArray.add(imagePath2);
         response = client.match(pathArray, new HashMap<String, String>());
         System.out.println("参数为本地图片路径:" + response.toString());
 
+    }
+
+    public static void identifyUser(AipFace client) {
+        String path = "F:\\娱乐\\驾驶证.png";
+        HashMap<String, Object> options = new HashMap<String, Object>(1);
+        options.put("user_top_num", 1);
+        JSONObject res = client.identifyUser(Arrays.asList("group1", "group2"), path, options);
+        System.out.println(res.toString(2));
+    }
+
+    //返回{"log_id": 2191026935090713}
+    public static void facesetAddUser(AipFace client) {
+        // 参数为本地图片路径
+        String path = "F:\\娱乐\\20170906173124.png";
+        HashMap<String, String> options = new HashMap<String, String>();
+        JSONObject res = client.addUser("uid1", "test_user_info", Arrays.asList("group1", "group2"), path, options);
+        System.out.println(res.toString(2));
+    }
+
+    /**
+     * {
+            "result": [
+            45.72191619873,
+            45.72191619873,
+            45.72191619873,
+            45.72191619873
+            ],
+            "log_id": 2224991011090714,
+            "result_num": 4
+        }
+    */
+    public static void verifyUser(AipFace client) {
+        String path = "F:\\娱乐\\驾驶证.png";
+        HashMap<String, Object> options = new HashMap<String, Object>(1);
+        options.put("top_num", 5);
+        JSONObject res = client.verifyUser("uid1", Arrays.asList("group1", "group2"), path, options);
+        System.out.println(res.toString(2));
+    }
+
+    public static void facesetUpdateUser(AipFace client) {
+        // 参数为本地图片路径
+        String path = "F:\\娱乐\\驾驶证.png";
+        HashMap<String, String> options = new HashMap<String, String>();
+        JSONObject res = client.updateUser("uid1", "user_info_memo", "group1", path, options);
+        System.out.println(res.toString(2));
+    }
+
+    public static void getUser(AipFace client) {
+        // 查询一个用户在所有组内的信息
+        JSONObject res = client.getUser("uid1");
+        System.out.println(res.toString(2));
+
+        // 查询一个用户在指定组内的信息
+        JSONObject res2 = client.getUser("uid1", Arrays.asList("group1"));
+        System.out.println(res2.toString(2));
     }
 }
