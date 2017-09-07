@@ -31,16 +31,16 @@ public class Face {
         //faceRecognize(client);
 
         //人脸识别
-        //identifyUser(client);
+        identifyUser(client);
 
         //人脸注册
         //facesetAddUser(client);
 
         //人脸认证
-        //verifyUser(client);
+        verifyUser(client);
 
         //人脸更新
-        facesetUpdateUser(client);
+        //facesetUpdateUser(client);
 
         //用户信息查询
         getUser(client);
@@ -79,7 +79,7 @@ public class Face {
         HashMap<String, Object> options = new HashMap<String, Object>(1);
         options.put("user_top_num", 1);
         JSONObject res = client.identifyUser(Arrays.asList("group1", "group2"), path, options);
-        System.out.println(res.toString(2));
+        System.out.println("人脸识别" + res.toString(2));
     }
 
     //返回{"log_id": 2191026935090713}
@@ -88,7 +88,7 @@ public class Face {
         String path = "F:\\娱乐\\20170906173124.png";
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject res = client.addUser("uid1", "test_user_info", Arrays.asList("group1", "group2"), path, options);
-        System.out.println(res.toString(2));
+        System.out.println("人脸注册" + res.toString(2));
     }
 
     /**
@@ -104,11 +104,11 @@ public class Face {
         }
     */
     public static void verifyUser(AipFace client) {
-        String path = "F:\\娱乐\\驾驶证.png";
+        String path = "F:\\娱乐\\20170906173124.png";
         HashMap<String, Object> options = new HashMap<String, Object>(1);
         options.put("top_num", 5);
         JSONObject res = client.verifyUser("uid1", Arrays.asList("group1", "group2"), path, options);
-        System.out.println(res.toString(2));
+        System.out.println("人脸验证" + res.toString(2));
     }
 
     public static void facesetUpdateUser(AipFace client) {
@@ -116,16 +116,16 @@ public class Face {
         String path = "F:\\娱乐\\驾驶证.png";
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject res = client.updateUser("uid1", "user_info_memo", "group1", path, options);
-        System.out.println(res.toString(2));
+        System.out.println("人脸更新" + res.toString(2));
     }
 
     public static void getUser(AipFace client) {
         // 查询一个用户在所有组内的信息
         JSONObject res = client.getUser("uid1");
-        System.out.println(res.toString(2));
+        System.out.println("获取所有组内人脸信息" + res.toString(2));
 
         // 查询一个用户在指定组内的信息
         JSONObject res2 = client.getUser("uid1", Arrays.asList("group1"));
-        System.out.println(res2.toString(2));
+        System.out.println("获取指定组人脸信息" + res2.toString(2));
     }
 }
