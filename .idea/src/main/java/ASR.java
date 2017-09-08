@@ -1,8 +1,10 @@
 import com.baidu.aip.speech.AipSpeech;
+import com.baidu.aip.speech.TtsResponse;
 import com.baidu.aip.util.Util;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Created by 蔡琦 on 2017-9-6.
@@ -32,7 +34,11 @@ public class ASR {
         /*JSONObject res = client.asr("test.pcm","pcm",16000,null);
         System.out.println(res.toString(2));*/
 
+        //语音识别
         systhesis(client);
+
+        //语音合成
+        synthesis(client);
     }
 
     public static void systhesis(AipSpeech client) throws IOException {
@@ -53,5 +59,21 @@ public class ASR {
         JSONObject res = client.asr(url, callback, "pcm", 16000, null);
         System.out.println("对网络上音频进行识别:" + res);
 
+    }
+
+    //语音合成
+    public static void synthesis(AipSpeech client)
+    {
+        TtsResponse res = client.synthesis("你好百度", "zh", 1, null);
+        System.out.println("语音合成" + res.getErrorCode());
+
+        // 设置可选参数
+        HashMap<String, Object> options = new HashMap<String, Object>();
+        options.put("spd", "5");
+        options.put("pit", "5");
+        options.put("per", "4");
+        TtsResponse res1 = client.synthesis("你好百度", "zh", 1, options);
+        System.out.println("语音合成" + res1.getErrorCode());
+        byte[] data = res.getData();
     }
 }
